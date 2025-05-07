@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Page with Chatbot</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="main-container">
+    <!-- Left: Company Details -->
+    <div class="company-details">
+      <h3>Our Company</h3>
+      <p><strong>Address:</strong> 123 Innovation Street, Tech City, India</p>
+      <p><strong>Email:</strong> contact@company.com</p>
+      <p><strong>Phone:</strong> +91 98765 43210</p>
+
+      <div class="social-links">
+        <a href="#" class="social-icon fb">Facebook</a>
+        <a href="#" class="social-icon tw">Twitter</a>
+        <a href="#" class="social-icon li">LinkedIn</a>
+        <a href="#" class="social-icon ig">Instagram</a>
+      </div>
+    </div>
+
+    <!-- Right: Contact Form -->
+    <div class="form-container">
+      <h2>Contact Me</h2>
+      <form action="https://api.web3forms.com/submit" method="POST">
+
+        <!-- Replace with your Access Key -->
+        <input type="hidden" name="access_key" value="ded6d2f4-1d2d-47c6-a53f-d572837f29ad">
+    
+        <!-- Form Inputs. Each input must have a name="" attribute -->
+        <input type="text" name="name" required placeholder="Your Name">
+        <input type="email" name="email" required placeholder="Your Email">
+        <textarea name="message" required placeholder="Your Message"></textarea>
+    
+        <!-- Honeypot Spam Protection -->
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+    
+        <!-- Custom Confirmation / Success Page -->
+        <!-- <input type="hidden" name="redirect" value="https://mywebsite.com/thanks.html"> -->
+    
+        <button type="submit">Submit Form</button>
+    
+      </form>
+    </div>
+  </div>
+
+  <!-- Chat Toggle Button -->
+  <div class="chat-toggle" onclick="toggleChat()">
+    💬
+  </div>
+
+  <!-- Chatbot Section (Initially Hidden) -->
+  <div class="chatbot-container" id="chatbot">
+    <div class="chat-header">
+      ChatBot 
+      <span class="close-btn" onclick="toggleChat()">×</span>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <!-- Initial Bot Questions will appear here -->
+    </div>
+  </div>
+
+  <!-- Chatbot Script -->
+  <script>
+    function toggleChat() {
+      const chatbot = document.getElementById("chatbot");
+      chatbot.classList.toggle("show");
+
+      // When the chatbot is opened, display predefined questions automatically
+      if (chatbot.classList.contains("show")) {
+        displayBotQuestions();
+      }
+    }
+
+    function displayBotQuestions() {
+      const chatBody = document.getElementById("chat-body");
+
+      // Predefined questions
+      const questions = [
+        "What is your company?",
+        "How can I contact you?",
+        "What is your address?",
+        "Where can I follow you?"
+      ];
+
+      // Display each question as a bot message
+      questions.forEach((question) => {
+        const botMsg = document.createElement("div");
+        botMsg.className = "bot-msg";
+        botMsg.textContent = question;
+        botMsg.onclick = function() {
+          sendQuestionToBot(question);
+        };
+        chatBody.appendChild(botMsg);
+        // Animate the appearance of bot message
+        setTimeout(() => botMsg.classList.add("animate-message"), 100);
+      });
+    }
+
+    function sendQuestionToBot(question) {
+      const chatBody = document.getElementById("chat-body");
+
+      // Display clicked question as user message
+      const userMsg = document.createElement("div");
+      userMsg.className = "user-msg";
+      userMsg.textContent = question;
+      chatBody.appendChild(userMsg);
+
+      // Get bot response
+      const botResponse = getBotResponse(question);
+
+      // Create typing effect
+      const typingMsg = document.createElement("div");
+      typingMsg.className = "bot-msg typing";
+      typingMsg.textContent = "Bot is typing...";
+      chatBody.appendChild(typingMsg);
+      
+      // Remove typing message and show the actual bot response after a delay
+      setTimeout(() => {
+        typingMsg.remove();
+        const botMsg = document.createElement("div");
+        botMsg.className = "bot-msg";
+        botMsg.textContent = botResponse;
+        chatBody.appendChild(botMsg);
+        botMsg.classList.add("animate-message");
+      }, 1500);
+
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Function to get chatbot's response based on user question
+    function getBotResponse(userQuestion) {
+      const responses = {
+        "What is your company?": "We are a tech company focused on innovation and customer satisfaction.",
+        "How can I contact you?": "You can contact us via email at contact@company.com or call us at +91 98765 43210.",
+        "What is your address?": "Our office is located at 123 Innovation Street, Tech City, India.",
+        "Where can I follow you?": "You can follow us on Facebook, Twitter, LinkedIn, and Instagram!"
+      };
+
+      return responses[userQuestion] || "Sorry, I didn't understand that. Can you ask something else?";
+    }
+  </script>
+</body>
+</html>
