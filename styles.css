@@ -1,0 +1,306 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(45deg, #ff7f50, #ff1493, #00bfff, #32cd32);
+  background-size: 400% 400%;
+  animation: gradientAnimation 6s ease infinite;
+  color: #333;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Main Container */
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 50px;
+  gap: 30px;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+/* Left Container (Company Details) */
+.company-details {
+  width: 45%;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: slideInLeft 1s ease-out;
+}
+
+.company-details:hover {
+  transform: translateY(-5px);
+}
+
+.company-details h3 {
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.company-details p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.company-details .social-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.social-links a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #fff;
+  padding: 12px;
+  border-radius: 50%;
+  background-color: #4caf50;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.company-details .social-links a:nth-child(1) {
+  background-color: #3b5998; /* Facebook */
+}
+
+.company-details .social-links a:nth-child(2) {
+  background-color: #1da1f2; /* Twitter */
+}
+
+.company-details .social-links a:nth-child(3) {
+  background-color: #0077b5; /* LinkedIn */
+}
+
+.company-details .social-links a:nth-child(4) {
+  background-color: #e4405f; /* Instagram */
+}
+
+/* Hover Effect for Social Links */
+.company-details .social-links a:hover {
+  background-color: #3e08f0;
+  transform: scale(1.1);
+}
+
+/* Right Container (Contact Form) */
+.form-container {
+  width: 45%;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: slideInRight 1s ease-out;
+}
+
+.form-container:hover {
+  transform: translateY(-5px);
+}
+
+
+.form-container h2 {
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form-container input,
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+  border-color: #3e08f0;
+  outline: none;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 15px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #3e08f0;
+  transform: scale(1.05);
+}
+
+/* Chatbot Styles */
+.chat-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 30px;
+  background-color: #3e08f0;
+  color: white;
+  padding: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.chat-toggle:hover {
+  background-color: #45a049;
+  transform: scale(1.1);
+}
+
+.chatbot-container {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 300px;
+  background-color: #ffffff;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.chatbot-container.show {
+  display: flex;
+}
+
+.chat-header {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-size: 20px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  color: white;
+}
+
+.chat-body {
+  padding: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.chat-body .bot-msg,
+.chat-body .user-msg {
+  margin: 15px 0;
+  padding: 12px;
+  border-radius: 12px;
+  max-width: 80%;
+}
+
+.bot-msg {
+  background-color: #f0f0f0;
+  color: #333;
+  align-self: flex-start;
+}
+
+.user-msg {
+  background-color: #4caf50;
+  color: white;
+  align-self: flex-end;
+}
+
+.typing {
+  font-style: italic;
+  color: #888;
+}
+
+.animate-message {
+  animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
